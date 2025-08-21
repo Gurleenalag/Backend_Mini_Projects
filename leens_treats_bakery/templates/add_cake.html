@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Add Item • Leen’s Treats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>Add Item • Leen’s Treats</h1>
+    <div class="nav-links">
+      <a href="{{ url_for('admin') }}">Back to Admin</a>
+    </div>
+  </nav>
+
+  <section class="form-wrap">
+    <form method="post" enctype="multipart/form-data">
+  <p>Name: <input type="text" name="name" required></p>
+  <p>Description: <input type="text" name="description" required></p>
+  <p>Price (₹): <input type="number" name="price" step="0.01" min="0" required></p> <!-- NEW -->
+  <p>Image: <input type="file" name="image" required></p>
+  <p><button type="submit">Add Cake</button></p>
+</form>
+
+  </section>
+</body>
+</html>

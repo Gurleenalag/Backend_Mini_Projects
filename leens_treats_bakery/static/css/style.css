@@ -1,0 +1,290 @@
+/* ------------------ General ------------------ */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #fff8dc, #e6f7ff, #f3e8ff);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #333;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ------------------ Navbar ------------------ */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #ff6f91;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.navbar .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.navbar .logo i {
+    font-size: 20px;
+}
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.navbar a:hover {
+    color: #ffd1dc;
+}
+.cart-icon {
+    position: relative;
+    font-size: 18px;
+}
+.cart-icon span {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #fff;
+    color: #ff6f91;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+}
+
+/* ------------------ Hero / Banner ------------------ */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 400px; /* height बढ़ा दी */
+    overflow: hidden;
+    margin-bottom: 40px;
+    border-radius: 0 0 25px 25px;
+}
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    background: rgba(0,0,0,0.35);
+    padding: 20px 30px;
+    border-radius: 15px;
+}
+.hero-text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.hero-text p {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+.order-now-btn {
+    background: #ff80ab;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+.order-now-btn:hover {
+    background: #f50057;
+    transform: scale(1.05);
+}
+
+/* ------------------ Cakes Grid ------------------ */
+.cakes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    padding: 40px;
+}
+
+.cake-card {
+    border-radius: 18px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+}
+.cake-card:nth-child(3n+1) { background: #ffe6f0; }
+.cake-card:nth-child(3n+2) { background: #fffde7; }
+.cake-card:nth-child(3n+3) { background: #e6f7ff; }
+
+.cake-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.18);
+}
+
+.cake-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.cake-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.3rem;
+    color: #6a1b9a;
+}
+
+.cake-card p {
+    font-size: 0.95em;
+    color: #444;
+}
+
+.price {
+    font-weight: 700;
+    color: #d6336c;
+    margin-top: 6px;
+    font-size: 1.1rem;
+}
+
+/* ------------------ Buttons ------------------ */
+.buy-btn {
+    margin-top: 12px;
+    padding: 10px 22px;
+    background: #ff80ab;
+    border: none;
+    color: white;
+    font-size: 1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.buy-btn:hover {
+    background: #f50057;
+    transform: scale(1.07);
+}
+
+/* ------------------ Cart Table ------------------ */
+.cart-container { 
+    max-width: 900px; 
+    margin: 50px auto; 
+    padding: 20px; 
+    background: #fff; 
+    border-radius: 12px; 
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+.cart-header { 
+    text-align: center; 
+    font-size: 2rem; 
+    margin-bottom: 20px; 
+    color: #7b1fa2; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+th, td { 
+    padding: 15px; 
+    text-align: center; 
+    border-bottom: 1px solid #ccc; 
+}
+.cart-container img { 
+    width: 80px; 
+    height: 80px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+.qty-input { 
+    width: 50px; 
+    text-align: center; 
+    padding: 5px; 
+    border-radius: 5px; 
+    border: 1px solid #bbb;
+}
+.btn { 
+    padding: 8px 15px; 
+    background: #ba68c8; 
+    border: none; 
+    color: white; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+.btn:hover { 
+    background: #9c27b0; 
+}
+.total { 
+    text-align: right; 
+    font-size: 1.5rem; 
+    margin-top: 20px; 
+    color: #6a1b9a; 
+}
+.checkout-btn { 
+    float: right; 
+    margin-top: 20px; 
+    background: #ff80ab; 
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 30px; 
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+.checkout-btn:hover {
+    background: #f50057;
+}
+
+/* ------------------ Footer ------------------ */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #ff6f91;
+    color: white;
+    margin-top: 40px;
+    box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
+    border-radius: 20px 20px 0 0;
+}
+
+/* Define sparkle animation */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+/* Sparkle element styling */
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+/* Random positions inside the card */
+.sparkle:nth-child(1) { top: 10%; left: 20%; }
+.sparkle:nth-child(2) { top: 30%; right: 15%; }
+.sparkle:nth-child(3) { bottom: 25%; left: 40%; }
+.sparkle:nth-child(4) { top: 50%; left: 75%; }
+.sparkle:nth-child(5) { bottom: 15%; right: 30%; }
+/* ...add more as needed */

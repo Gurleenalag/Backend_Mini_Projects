@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="checkout-container">
+    <h2 class="checkout-title">✅ Checkout</h2>
+
+    {% if items %}
+      <!-- Order Summary Table -->
+      <table class="checkout-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              <td><img src="{{ url_for('static', filename='uploads/' ~ item.image) }}" alt="{{ item.name }}"></td>
+              <td>{{ item.name }}</td>
+              <td>₹{{ item.price }}</td>
+              <td>{{ item.qty }}</td>
+              <td>₹{{ item.subtotal }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Customer Details -->
+      <form method="POST" class="checkout-form">
+        <div class="form-section">
+          <h3>🧑 Customer Details</h3>
+          <label for="name">Full Name</label>
+          <input type="text" name="name" id="name" required>
+
+          <label for="address">Address</label>
+          <textarea name="address" id="address" rows="3" required></textarea>
+
+          <label for="phone">Phone Number</label>
+          <input type="text" name="phone" id="phone" required>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="form-section">
+          <h3>💳 Payment Method</h3>
+          <label><input type="radio" name="payment" value="COD" checked> Cash on Delivery</label><br>
+          <label><input type="radio" name="payment" value="Online"> Online Payment</label>
+        </div>
+
+        <!-- Total + Place Order -->
+        <div class="checkout-summary">
+          <h3>Total: <span>₹{{ total }}</span></h3>
+          <button type="submit" class="place-order-btn">Place Order</button>
+        </div>
+      </form>
+    {% else %}
+      <p class="empty-msg">😔 Your cart is empty. <a href="{{ url_for('index') }}">Go back shopping</a>.</p>
+    {% endif %}
+  </div>
+
+  <style>
+    .checkout-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .checkout-title {
+      font-size: 2.4rem;
+      color: #ff4d6d;
+      margin-bottom: 25px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* Table */
+    .checkout-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+    }
+    .checkout-table th {
+      background: #f8f9fa;
+      padding: 14px;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-bottom: 2px solid #eee;
+    }
+    .checkout-table td {
+      padding: 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .checkout-table tr:hover {
+      background: #fafafa;
+    }
+    .checkout-table img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Form */
+    .checkout-form {
+      text-align: left;
+    }
+    .form-section {
+      margin-bottom: 25px;
+    }
+    .form-section h3 {
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 1.3rem;
+    }
+    .form-section label {
+      display: block;
+      margin: 8px 0 4px;
+      font-weight: bold;
+      color: #444;
+    }
+    .form-section input,
+    .form-section textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    /* Summary */
+    .checkout-summary {
+      margin-top: 25px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #333;
+      text-align: right;
+    }
+    .checkout-summary span {
+      color: #28a745;
+      font-size: 1.6rem;
+    }
+
+    /* Button */
+    .place-order-btn {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .place-order-btn:hover {
+      background: #e63e5c;
+    }
+
+    /* Empty Cart */
+    .empty-msg {
+      font-size: 1.3rem;
+      color: #555;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .empty-msg a {
+      color: #ff4d6d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .empty-msg a:hover {
+      text-decoration: underline;
+    }
+  </style>
+{% endblock %}

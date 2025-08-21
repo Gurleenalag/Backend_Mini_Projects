@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="cart-container">
+    <h2 class="cart-title">🛒 Your Cart</h2>
+
+    {% if items %}
+      <form method="POST" action="{{ url_for('update_cart') }}">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+              <tr>
+                <td><img src="{{ url_for('static', filename='uploads/' ~ item.image) }}" alt="{{ item.name }}"></td>
+                <td>{{ item.name }}</td>
+                <td>₹{{ item.price }}</td>
+                <td>
+                  <input type="number" name="qty_{{ item.id }}" value="{{ item.qty }}" min="1">
+                </td>
+                <td>₹{{ item.subtotal }}</td>
+                <td>
+                  <form method="POST" action="{{ url_for('remove_from_cart', cake_id=item.id) }}">
+                    <button type="submit" class="remove-btn">✖</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <div class="cart-summary">
+          <h3>Total: <span>₹{{ total }}</span></h3>
+          <button type="submit" class="update-btn">Update Cart</button>
+          <a href="{{ url_for('checkout') }}" class="checkout-btn">Proceed to Checkout</a>
+        </div>
+      </form>
+    {% else %}
+      <p class="empty-msg">😔 Your cart is empty. <a href="{{ url_for('index') }}">Go back shopping</a>.</p>
+    {% endif %}
+  </div>
+
+  <style>
+    .cart-container {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .cart-title {
+      font-size: 2rem;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    .cart-table th {
+      background: #ff4d6d;
+      color: white;
+      padding: 12px;
+      font-size: 1.2rem;
+    }
+
+    .cart-table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-table img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    input[type="number"] {
+      width: 60px;
+      padding: 6px;
+      font-size: 1rem;
+      text-align: center;
+      border: 2px solid #ff4d6d;
+      border-radius: 6px;
+    }
+
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: red;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .cart-summary span {
+      color: #ff4d6d;
+      font-size: 1.5rem;
+    }
+
+    .update-btn, .checkout-btn {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .update-btn:hover, .checkout-btn:hover {
+      background: #e63e5c;
+    }
+
+    .checkout-btn {
+      background: #28a745;
+    }
+
+    .checkout-btn:hover {
+      background: #218838;
+    }
+
+    .empty-msg {
+      font-size: 1.3rem;
+      color: #555;
+      margin-top: 20px;
+    }
+
+    .empty-msg a {
+      color: #ff4d6d;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .empty-msg a:hover {
+      text-decoration: underline;
+    }
+  </style>
+{% endblock %}

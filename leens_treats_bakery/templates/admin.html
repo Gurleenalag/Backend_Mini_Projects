@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin • Leen’s Treats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>Admin • Leen’s Treats</h1>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('add_cake') }}">Add New</a>
+    </div>
+  </nav>
+
+  <section class="admin-list">
+    <ul>
+      {% for cake in cakes %}
+        <li>
+  <img src="{{ url_for('static', filename='uploads/' ~ cake.image) }}" width="80">
+  <b>{{ cake.name }}</b> — ₹{{ '%.2f'|format(cake.price or 0) }}<br>
+  <small>{{ cake.description }}</small>
+</li>
+
+      {% else %}
+        <li>No items yet.</li>
+      {% endfor %}
+    </ul>
+  </section>
+</body>
+</html>

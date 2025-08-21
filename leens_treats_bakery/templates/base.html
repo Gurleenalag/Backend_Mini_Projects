@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leen’s Treats</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff5f8;
+      color: #333;
+    }
+
+    /* Navbar */
+    header {
+  background: #ff6b88;  /* softer rosy pink */
+  padding: 15px 30px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      height: 60px; /* Adjust logo size */
+      width: auto;
+      margin-right: 12px;
+    }
+
+    .brand-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #fff, #ffd6e0);
+  background-clip: text;        /* Standard property */
+  -webkit-background-clip: text; /* For Chrome, Safari */
+  -webkit-text-fill-color: transparent;
+}
+
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      position: relative;
+    }
+
+    /* Cart count badge */
+    #cart-count {
+      background: white;
+      color: #ff4d6d;
+      border-radius: 50%;
+      padding: 2px 7px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    /* Cart animation */
+    .cart-highlight {
+      animation: cartBlink 1s ease;
+    }
+    @keyframes cartBlink {
+      0% { color: yellow; transform: scale(1.2); }
+      50% { color: white; transform: scale(1); }
+      100% { color: yellow; transform: scale(1.2); }
+    }
+
+    /* Toast popup */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background: #28a745;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      padding: 14px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 30px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+
+    /* Footer */
+    footer {
+      background: #ff4d6d;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="brand">
+      <img src="{{ url_for('static', filename='uploads/logo.jpg') }}" alt="Leen’s Treats Logo" class="logo">
+      <span class="brand-name">Leen’s Treats</span>
+    </div>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('menu') }}">Menu</a>
+      <a href="{{ url_for('about') }}">About Us</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      <a href="{{ url_for('cart') }}" id="cart-link">
+        🛒 Cart
+        {% if session.get('cart') and session['cart']|length > 0 %}
+          <span id="cart-count">{{ session['cart']|length }}</span>
+        {% endif %}
+      </a>
+    </nav>
+  </header>
+
+  <!-- Page content -->
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Leen’s Treats | All Rights Reserved</p>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast">🛒 Item added to cart!</div>
+
+  <!-- Flash + JS -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Show toast
+          var toast = document.getElementById("toast");
+          toast.className = "show";
+          setTimeout(function() {
+            toast.className = toast.className.replace("show", "");
+          }, 3000);
+
+          // Highlight cart
+          var cartLink = document.getElementById("cart-link");
+          if (cartLink) {
+            cartLink.classList.add("cart-highlight");
+            setTimeout(() => {
+              cartLink.classList.remove("cart-highlight");
+            }, 2000);
+          }
+        });
+      </script>
+    {% endif %}
+  {% endwith %}
+
+</body>
+</html>

@@ -45,7 +45,10 @@ Help beginners understand Flask/Django through examples
 
 
 ---
+SNAPSHOT:
+<img width="1366" height="699" alt="Screenshot (130)" src="https://github.com/user-attachments/assets/2c6d59d2-0c76-4aa8-9d66-186eb4cf8375" />
 
+---
 🤝 Contribution
 Have ideas or improvements?
 Fork this repo 🍴

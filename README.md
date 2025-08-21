@@ -27,7 +27,7 @@ Frontend: HTML, CSS, Bootstrap
 
 📂 Projects Included
 
-1. **🍰 Leen’s Treats Bakery **(Flask)
+**1. 🍰 Leen’s Treats Bakery (Flask)**
 → An online bakery shop with product showcase, order system, and admin panel.
 
 
